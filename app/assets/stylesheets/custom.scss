@@ -52,19 +52,64 @@ p {
 
 /* ヘッダー */
 
+#top-main {
+   background-color: rgba(225,225,225,0)
+ }
+ 
+ #top-main-title {
+   font-style: italic;
+   font-weight: bold;
+ }
+ 
+ li .dropdown-header {
+  background-color: rgba(200,200,200,0.5);
+  font-weight: bold;
+ }
+ 
+ .btn-form {
+  margin-top: 10px;
+ }
+ 
+ .label-control {
+  margin-top: 5px;
+ }
+ 
+ 
+ 
+ 
+ 
+
+header {
+  background-color: teal !important;
+}
+
+.header-list {
+  color: white !important;
+  font-weight: bold;
+}
+
+.header-list:hover {
+  color: lightgray !important;
+  background-color: teal !important;
+}
+
+.dropdown-toggle {
+    background-color: teal !important;
+}
+
 #logo {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
   color: #fff;
-  text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
+  font-style: italic;
   font-weight: bold;
 }
 
 #logo:hover {
-  color: #fff;
+  color: lightgray;
   text-decoration: none;
 }
 
