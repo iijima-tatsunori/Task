@@ -6,30 +6,30 @@
     <table class="table table-bordered" id="table-task">
       <tbody>
         <tr>
-          <th class="active col-md-2">ID</th>
+          <th class="active col-md-2"><%= Task.human_attribute_name :id %></th>
           <td class="col-md-10"><%= @task.id %></td>
         </tr>
         <tr>
-          <th class="active">名称</th>
+          <th class="active"><%= Task.human_attribute_name :name %></th>
           <td class="col-md-10"><%= @task.name %></td>
         </tr>
         <tr>
-          <th class="active">詳細</th>
-          <td class="col-md-10"><%= Rinku.auto_link(@task.discription, :all, 'target="_blank"').html_safe %></td>
+          <th class="active"><%= Task.human_attribute_name :discription %></th>
+          <td class="col-md-10"><%= raw Rinku.auto_link(simple_format(@task.discription), :all, 'target="_blank"').html_safe %></td>
         </tr>
          <tr>
-          <th class="active">作成日</th>
+          <th class="active"><%= User.human_attribute_name :created_at %></th>
           <td class="col-md-10"><%= @task.created_at %></td>
         </tr>
          <tr>
-          <th class="active">更新日</th>
+          <th class="active"><%= User.human_attribute_name :updated_at %></th>
           <td class="col-md-10"><%= @task.updated_at %></td>
         </tr>
       </tbody>
     </table>
     <div>
       <%= link_to "編集", edit_user_task_path, class: "btn btn-success btn-lg" %>
-      <%= link_to "削除", user_task_path, method: :delete, class: "btn btn-danger btn-lg" %>
-    </div>
+      <%= link_to "削除", user_task_path, method: :delete, data: { confirm: "#{@task.name}を削除しますか?" }, class: "btn btn-danger btn-lg" %>
+    </div>  
   </div>
 </div>

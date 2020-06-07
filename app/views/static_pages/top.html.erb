@@ -6,33 +6,56 @@
       <h1 id="top-main-title">TaskApp</h1>
       <p>TaskAppは簡易ToDo管理ツールです。</p>
       <p>↓↓初めてのご利用↓↓</p>
-      
-         <a class="btn btn-lg btn-success" href="/signup">アカウント作成</a>
-      
-      <!-- <a class="btn btn-lg btn-success disabled" role="button" aria-disabled="true" href="/signup">アカウント作成</a>-->
-      
-      <div style="margin-top: 10px;">
-        <a class="btn btn-danger"　href="/guest-admin/login">ゲストログイン（管理権限）</a>
-        <a class="btn btn-warning" href="/guest/login">ゲストログイン（一般権限）</a>
-      </div>  
+      <% if logged_in? %>
+        <% if current_user.admin? %>
+          <a class="btn btn-lg btn-success" href="/signup">アカウント作成</a>
+        <% else %>
+          <a class="btn btn-lg btn-success disabled" role="button" aria-disabled="true" href="/signup">アカウント作成</a>
+        <% end %>
+      <% else %>  
+        <a class="btn btn-lg btn-success" href="/signup">アカウント作成</a>
+      <% end %>
     </div>
   </div>
   <div class="col-md-4">
     <h1>ログイン</h1>
-      <%= form_with(scope: :session, url: login_path, local: true) do |f| %>
-      
-        <%= f.label "メールアドレス", class: "label-login" %>
-        <%= f.email_field :email, class: 'form-control' %>
-  
-        <%= f.label "パスワード", class: "label-login" %>
-        <%= f.password_field :password, class: 'form-control' %>
-      
-        <%= f.label :remember_me, class: "checkbox inline checkbox-login", for: "remember-me" do %>
-          <%= f.check_box :remember_me, id: "remember-me" %>
-          <span>ログイン情報を記憶する</span>
-        <% end %>
+    
+    <% if logged_in? %>
+      <fieldset disabled>
+       <%= form_with(scope: :session, url: login_path, local: true) do |f| %>
         
-        <%= f.submit "ログイン", class: "btn btn-primary btn-block btn-login" %> 
+          <%= f.label "メールアドレス", class: "label-login" %>
+          <%= f.email_field :email, class: 'form-control' %>
+    
+          <%= f.label "パスワード", class: "label-login" %>
+          <%= f.password_field :password, class: 'form-control' %>
+        
+          <%= f.label :remember_me, class: "checkbox inline checkbox-login", for: "remember-me" do %>
+            <%= f.check_box :remember_me, id: "remember-me" %>
+            <span>ログイン情報を記憶する</span>
+          <% end %>
+          
+          <%= f.submit "ログインしています", class: "btn btn-primary btn-block btn-login" %> 
+        <% end %>
+      </fieldset>
+    <% else %>
+      
+        <%= form_with(scope: :session, url: login_path, local: true) do |f| %>
+        
+          <%= f.label "メールアドレス", class: "label-login" %>
+          <%= f.email_field :email, class: 'form-control' %>
+    
+          <%= f.label "パスワード", class: "label-login" %>
+          <%= f.password_field :password, class: 'form-control' %>
+        
+          <%= f.label :remember_me, class: "checkbox inline checkbox-login", for: "remember-me" do %>
+            <%= f.check_box :remember_me, id: "remember-me" %>
+            <span>ログイン情報を記憶する</span>
+          <% end %>
+          
+          <%= f.submit "ログイン", class: "btn btn-primary btn-block btn-login" %> 
+        <% end %>
+      
       <% end %>
   </div>
 </div>

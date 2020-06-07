@@ -2,8 +2,9 @@ class TasksController < ApplicationController
   
   before_action :set_user
   before_action :logged_in_user
-  before_action :correct_user
-   
+  before_action :correct_user, only: [:new]
+  before_action :correct_user_edit, only: [:edit]
+
   
   def new
     @task = Task.new
@@ -20,7 +21,7 @@ class TasksController < ApplicationController
   end
   
   def index 
-    @tasks = @user.tasks
+    @tasks = @user.tasks.order(id: :desc)
   end
   
   def show
@@ -68,6 +69,13 @@ class TasksController < ApplicationController
   
   def correct_user
     redirect_to(root_url) unless current_user?(@user)
+  end
+  
+  def correct_user_edit
+    unless @user == current_user
+      redirect_to user_tasks_url current_user
+      flash[:danger] = "権限がありません。"
+    end
   end
  
   
